@@ -3,8 +3,10 @@ package au.com.softclient.multiscreensizeui_1.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,6 +26,19 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun ProfileScreen(){
+    val windowSize = rememberWindowSize()
+    when(windowSize.width){
+        WindowType.Compact ->{
+            CompactProfileScreen()
+        }
+        else -> {
+            MediumToExpandedProfileScreen()
+        }
+    }
+}
+
+@Composable
+fun CompactProfileScreen(){
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
@@ -59,6 +74,53 @@ fun ProfileScreen(){
 
     }
 }
+
+
+@Composable
+fun MediumToExpandedProfileScreen(){
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())
+        .padding(horizontal = 32.dp)
+    ) {
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(modifier = Modifier
+                .clip(RoundedCornerShape(20.dp))
+                .size(180.dp)
+                .background(MaterialTheme.colorScheme.primary)
+            ){
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "A",
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontSize = 80.sp,
+                )
+            }
+            Spacer(modifier = Modifier.height(150.dp))
+            Column {
+                UserInfo(
+                    title = "Name",
+                    content = "Pure"
+                )
+                UserInfo(
+                    title = "Email",
+                    content = "Pure@gmail.com"
+                )
+                UserInfo(
+                    title = "Gender",
+                    content = "Male"
+                )
+
+            }
+        }
+    }
+}
+
 
 @Composable
 fun UserInfo(
