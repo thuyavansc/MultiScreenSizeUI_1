@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -77,7 +78,7 @@ fun CompactProfileScreen(){
 
 
 @Composable
-fun MediumToExpandedProfileScreen(){
+fun MediumToExpandedProfileScreen0(){
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())
@@ -120,6 +121,61 @@ fun MediumToExpandedProfileScreen(){
         }
     }
 }
+
+
+@Composable
+fun MediumToExpandedProfileScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 32.dp)
+    ) {
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Profile Picture Box
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(20.dp))
+                    .size(180.dp)
+                    .background(MaterialTheme.colorScheme.primary)
+            ) {
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "A",
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontSize = 80.sp
+                )
+            }
+
+            // Spacer between Profile Picture and UserInfo
+            Spacer(modifier = Modifier.width(100.dp))
+
+            // UserInfo Column
+            Column {
+                UserInfo(
+                    title = "Name",
+                    content = "Pure"
+                )
+                Spacer(modifier = Modifier.height(16.dp)) // Adjusted spacing
+                UserInfo(
+                    title = "Email",
+                    content = "Pure@gmail.com"
+                )
+                Spacer(modifier = Modifier.height(16.dp)) // Adjusted spacing
+                UserInfo(
+                    title = "Gender",
+                    content = "Male"
+                )
+            }
+        }
+    }
+}
+
 
 
 @Composable
